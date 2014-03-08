@@ -11,10 +11,14 @@ def http_request(options={})
   uri = URI.parse(options[:uri])
   user = options[:user]
   password = options[:password]
+  proxy_addr = options[:proxy_addr]
+  proxy_port = options[:proxy_port]
+  proxy_user = options[:proxy_user]
+  proxy_pass = options[:proxy_pass]
   headers = options[:headers] || Hash.new
   parameters = options[:parameters] || Hash.new
   body = options[:body]
-  http = Net::HTTP.new(uri.host, uri.port)
+  http = Net::HTTP.new(uri.host, uri.port, proxy_addr, proxy_port, proxy_user, proxy_pass)
   if options[:ssl] == true
     http.use_ssl = true
     http.verify_mode = OpenSSL::SSL::VERIFY_NONE
